@@ -190,14 +190,24 @@ def from_json(ast_json):
     """ Build an ast from json string representation """
     return from_dict(json.loads(ast_json))
 
-
+def item_generator(json_input, lookup_key):
+    if isinstance(json_input, dict):
+        for k, v in json_input.items():
+            if k == lookup_key:
+                yield v
+            else:
+                yield from item_generator(v, lookup_key)
+    elif isinstance(json_input, list):
+        for item in json_input:
+            yield from item_generator(item, lookup_key)
+			
 #------------------------------------------------------------------------------
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         # Some test code...
         # Do trip from C -> ast -> dict -> ast -> json, then print.
-        ast_dict = file_to_dict(sys.argv[1])
-        ast = from_dict(ast_dict)
+        # ast_dict = file_to_dict(sys.argv[1])
+        ast = parse_file(sys.argv[1])
         print(to_json(ast, sort_keys=True, indent=4))
     else:
         print("Please provide a filename as argument")
