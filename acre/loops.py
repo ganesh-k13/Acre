@@ -2,7 +2,7 @@ import json
 import sys
 import re
 
-from ast_to_json import item_generator, file_to_dict
+from acre.ast_to_json import item_generator, file_to_dict
 
 class Loops:
 	def __init__(self, j_ast):
