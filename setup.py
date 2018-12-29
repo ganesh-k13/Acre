@@ -21,6 +21,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ),
     install_requires=[
-         
+        'pycparser==2.19',
+		    'pytest==3.6.1'
       ],
 )
