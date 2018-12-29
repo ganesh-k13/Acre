@@ -193,7 +193,8 @@ def from_json(ast_json):
 def item_generator(json_input, lookup_key, lookup_val):
     if isinstance(json_input, dict):
         for k, v in json_input.items():
-            if k == lookup_key and v == lookup_val:
+            if k == lookup_key and v == lookup_val: # and json_input['visited'] == False:
+				# json_input['visited'] == False
                 yield json_input['stmt']
             else:
                 yield from (item_generator(v, lookup_key, lookup_val))

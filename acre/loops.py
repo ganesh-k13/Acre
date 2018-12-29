@@ -36,15 +36,18 @@ class Loops:
 			levels.append(self._get_level(v, nodetype, level+1))
 		
 		return max(levels)
-		
-	def get_nested_level(self, nodetype):
+
+	def get_all_levels(self, nodetype):
 		levels = []
 		self._annotate_dict(self.j_ast, nodetype)
 		# pprint(self.j_ast)
 		for i, val in enumerate(item_generator(self.j_ast, '_nodetype', nodetype)):
 			levels.append(self._get_level(val, nodetype, 0))
-			
-		return max(levels)+1
+		
+		return levels
+	
+	def get_nested_level(self, nodetype):
+		return max(self.get_all_levels(nodetype))+1
 		
 	def detect_nested_while_hard(self, level):
 		for i, val in enumerate(item_generator(self.j_ast, '_nodetype', 'While')):
@@ -65,6 +68,7 @@ class Loops:
 if __name__ == '__main__':
 	ast_dict = file_to_dict(sys.argv[1])
 	l = Loops(ast_dict)
+	print(l.get_all_levels('While'))
 	print(l.get_nested_level('While'))
 	# print(l.detect_nested_while_hard(2))
 	# print(l.detect_nested_while_soft(1))
