@@ -22,6 +22,6 @@ setuptools.setup(
     ),
     install_requires=[
         'pycparser==2.19',
-		'pytest==3.6.1'
+		    'pytest==3.6.1'
       ],
 )
