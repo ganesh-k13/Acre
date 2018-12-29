@@ -194,9 +194,9 @@ def item_generator(json_input, lookup_key, lookup_val):
     if isinstance(json_input, dict):
         for k, v in json_input.items():
             if k == lookup_key and v == lookup_val:
-                yield v
+                yield json_input['stmt']
             else:
-                yield from item_generator(v, lookup_key, lookup_val)
+                yield from (item_generator(v, lookup_key, lookup_val))
     elif isinstance(json_input, list):
         for item in json_input:
             yield from item_generator(item, lookup_key, lookup_val)
