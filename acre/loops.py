@@ -10,10 +10,21 @@ class Loops:
 
 	def detect_nested_while_hard(self, level):
 		for i in item_generator(self.j_ast, '_nodetype', 'While'):
-			print(i)
+			pass
 		
+		if(i == level):
+			return True
+		
+		return False
+		
+	def detect_nested_while_soft(self, level):
+		for i in item_generator(self.j_ast, '_nodetype', 'While'):
+			if(i == level):
+				return True
+				
+		return False
 
 if __name__ == '__main__':
 	ast_dict = file_to_dict(sys.argv[1])
 	l = Loops(ast_dict)
-	l.detect_nested_while(2)
+	l.detect_nested_while_hard(2)
