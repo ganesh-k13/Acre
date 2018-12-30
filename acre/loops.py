@@ -27,6 +27,7 @@ class Loops:
 		try:
 			next(_check)
 		except(StopIteration):
+			pprint(self.j_ast)
 			return level
 		
 		val = item_generator(body, '_nodetype', nodetype)
